@@ -1,6 +1,6 @@
 
 // import { BASE_URL, getFromLocalStorage } from "@/utils";
-import useSWR, { SWRConfiguration } from "swr";
+import useSWR from "swr";
 import { BASE_URL } from "../DATA/category";
 
 const getFromLocalStorage = (key) => {

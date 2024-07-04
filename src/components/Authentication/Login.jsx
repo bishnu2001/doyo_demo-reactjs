@@ -4,9 +4,14 @@ import { BASE_URL } from '../../DATA/category'; // Ensure this import is correct
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from "react-redux";
+import { signinstart,signInFailure,signInSuccess } from "../../redux/user/useSlice";
+
 const Login = () => {
   const navigate=useNavigate()
   const [error, setError] = useState('');
+  const dispatch=useDispatch()
+  const {currentUser}=useSelector((state)=>state.user);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,13 +28,15 @@ const Login = () => {
       try {
         // Dispatch any actions related to login start (if using Redux)
         // For example: dispatch(signinstart());
-
+        dispatch(signinstart())
         const response = await axios.post(`${BASE_URL}/users/signin`, {
           email,
           password,
         });
-console.log(response)
+
         const userinfo = response.data.data.user;
+        dispatch(signInSuccess(userinfo))
+        console.log(userinfo)
         if(userinfo.role==='admin'){
           navigate('/adminchat')
         }else{
