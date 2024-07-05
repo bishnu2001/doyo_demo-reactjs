@@ -36,7 +36,6 @@ const Login = () => {
 
         const userinfo = response.data.data.user;
         dispatch(signInSuccess(userinfo))
-        console.log(userinfo)
         if(userinfo.role==='admin'){
           navigate('/adminchat')
         }else{
@@ -61,7 +60,7 @@ const Login = () => {
         setError('');
       } catch (error) {
         if (error.response) {
-          setError(error.response.data.error.message);
+          setError(error.response.data.message);
         } else {
           console.log("Error: Unable to send request");
         }
@@ -72,7 +71,6 @@ const Login = () => {
   return (
     <div className="max-w-md w-full mx-auto mt-10 p-6 bg-white shadow-md rounded-md">
       <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">Login</h2>
-      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-4">
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
@@ -86,6 +84,7 @@ const Login = () => {
             onBlur={formik.handleBlur}
             value={formik.values.email}
           />
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           {formik.touched.email && formik.errors.email && (
             <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
           )}
@@ -102,6 +101,7 @@ const Login = () => {
             onBlur={formik.handleBlur}
             value={formik.values.password}
           />
+          {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
           {formik.touched.password && formik.errors.password && (
             <p className="text-red-500 text-sm mt-1">{formik.errors.password}</p>
           )}
