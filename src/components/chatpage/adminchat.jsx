@@ -1,3 +1,4 @@
+
 // Import React and necessary hooks
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Assuming you're using React Router
@@ -25,12 +26,12 @@ const dispatch=useDispatch()
   };
   // Navigate to chat page function
   const goToChatPage = () => {
-    navigate('/chat');
+    navigate('/userlist');
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <UserList/>
+      {/* <UserList/> */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-2xl mb-4 text-center">Admin Chat</h1>
         <div className="mb-4">
